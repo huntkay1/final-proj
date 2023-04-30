@@ -61,6 +61,9 @@ function Banner() {
 
 
 function ImageCarousel() {
+
+  //lines 67 through 78 were coded with the help of ChatGPT to get me started. 
+  //I had to heavily edit and troubleshoot on my own
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -92,7 +95,7 @@ function ImageCarousel() {
         >
           {movies.map((movie) => (
             <div key={movie.id}>
-              <img className="carousel-image" src={movie.image} style={{ width: "300px", height: "400px" }}></img>
+              <img className="carousel-image" src={movie.image} alt="movie poster" style={{ width: "300px", height: "400px" }}></img>
             </div>
           ))}
         </Carousel>
@@ -103,29 +106,50 @@ function ImageCarousel() {
 
 
 
-
-
 function Review() {
 
+  //Lines 113 through 132 were coded with the help of ChatGPT
+  //I had to heavily edit and troubleshoot on my own
+  const [reviewText, setReviewText] = useState('');
+
+  const handleReviewSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const { data, error } = await supabase.from('Reviews').insert([{ review: reviewText }]);
+      if (error) {
+        throw error;
+      }
+      console.log(data);
+
+      setReviewText('');
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleReviewTextChange = (event) => {
+    setReviewText(event.target.value);
+  };
 
   return (
     <Container fluid className="review-area mt-5">
       <Row>
         <Col className="review-img-container col-lg-2">
-          <img height={350} width={260} src={everything} alt="Everything, Everywhere, All at Once poster" />
+          <img height={350} width={260} src={everything} alt="Everything,Everywhere,All at Once Poster" />
         </Col>
-
         <Col md={5} className="review-text-container">
           <h1>Everything, Everywhere, All at Once</h1>
           <h2>Tell us what you thought.</h2>
-          <Form>
+          <Form onSubmit={handleReviewSubmit}>
             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
               <Form.Control
                 as="textarea"
                 rows={5}
-                style={{ backgroundColor: "#151515", color: "white" }}
+                style={{ backgroundColor: '#151515', color: 'white' }}
+                value={reviewText}
+                onChange={handleReviewTextChange}
               />
-              <button type="submit" className="button" >Submit</button>
+              <button type="submit" className="button">Submit</button>
             </Form.Group>
           </Form>
         </Col>
@@ -133,6 +157,8 @@ function Review() {
     </Container>
   );
 }
+
+
 
 
 
