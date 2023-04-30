@@ -19,14 +19,14 @@
   margin-right: 100px;
 }
 
-.nav-link {
+.nav-button {
   text-decoration: none;
   color: white !important;
+  background-color: #050505;
+  border: none;
 }
 
-a:hover {
-  border-bottom: 1px solid #fff;
-}
+
 
 .search-bar {
   margin-left: 100px;

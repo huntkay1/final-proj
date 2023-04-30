@@ -29,13 +29,13 @@ function Navbar() {
         </Col>
 
         <Col className="d-flex align-items-center justify-content-center banner">
-          <img src={logo} className="App-logo"></img>
+          <img src={logo} className="App-logo" alt="blab"></img>
         </Col>
 
         <Col className="d-flex justify-content-end pr-0">
           <ul className= "d-flex list-inline">
-            <li className="list-inline-item mr-3"><a href="" className="nav-link">Log In</a></li>
-            <li className="list-inline-item"><a href="" className="nav-link">Sign Up</a></li>
+            <li className="list-inline-item mr-3"><button href="" className="nav-button">Log In</button></li>
+            <li className="list-inline-item"><button href="" className="nav-button">Sign Up</button></li>
           </ul>
         </Col>
         
@@ -157,9 +157,6 @@ function Review() {
     </Container>
   );
 }
-
-
-
 
 
 function App() {
