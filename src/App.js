@@ -50,7 +50,7 @@ function Banner() {
 
       <Row className="justify-content-center">
         <Col className="text-center">
-        <img src={banner} className="banner-img" alt="Everything,Everywhere,All at Once Scene"></img>
+        <img src={banner} className="banner-img" alt="source: https://www.google.com/url?sa=i&url=https%3A%2F%2Fa24films.com%2Ffilms%2Feverything-everywhere-all-at-once&psig=AOvVaw3sj6e0Fvma7m4MnvZKUdPV&ust=1682982006443000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCJi8qtfa0v4CFQAAAAAdAAAAABAE"></img>
         </Col>
       </Row>
 
@@ -135,7 +135,7 @@ function Review() {
     <Container fluid className="review-area mt-5">
       <Row>
         <Col className="review-img-container col-lg-2">
-          <img height={350} width={260} src={everything} alt="Everything,Everywhere,All at Once Poster" />
+          <img height={350} width={260} src={everything} alt="source: https://www.google.com/url?sa=i&url=https%3A%2F%2Fwallpapersafari.com%2Feverything-everywhere-all-at-once-wallpapers%2F&psig=AOvVaw3hOFAkwySXhNxMLkKU44cH&ust=1682982041467000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCJCS-Ofa0v4CFQAAAAAdAAAAABAE" />
         </Col>
         <Col md={5} className="review-text-container">
           <h1>Everything, Everywhere, All at Once</h1>
