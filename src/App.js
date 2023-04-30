@@ -1,17 +1,18 @@
 import logo from './blab.png';
 import banner from './banner2.jpg';
-import menu from './menu.jpeg';
-import mario from './mario.jpg';
 import everything from './everything.jpg';
-import dnd from './dnd.jpg';
+import React, { useState, useEffect } from "react";
 import { Carousel } from 'react-responsive-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { Container, Row, Col } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import './App.css';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { createClient } from '@supabase/supabase-js'
 
+const supabaseUrl = 'https://laicjuordudizaoukukg.supabase.co'
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxhaWNqdW9yZHVkaXphb3VrdWtnIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzgxMzI5MzgsImV4cCI6MTk5MzcwODkzOH0.6RVFmMqlii7oCPwuLFHfzOzbAfWtDtFzFDh9dN8jpmM'
+const supabase = createClient(supabaseUrl, supabaseKey)
 
 
 function Navbar() {
@@ -58,63 +59,60 @@ function Banner() {
   )
 }
 
+
 function ImageCarousel() {
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    async function fetchMovies() {
+      const response = await fetch(
+        "https://imdb-api.com/en/API/InTheaters/k_jih9bpg0"
+      );
+      const data = await response.json();
+      setMovies(data.items.slice(0, 10)); 
+    }
+    fetchMovies();
+  }, []);
+
+
   return (
     <div>
       <h1 className="carousel-head">What Everyone's Talking About</h1>
       <div className="container text-center">
-      <Carousel
-              showArrows={true}
-              showStatus={false}
-              showThumbs={false}
-              infiniteLoop
-              centerMode
-              centerSlidePercentage={30}
-              selectedItem={2} 
-              dynamicHeight={false}
-              width="100%"
-              renderItem={(item, options) => (
-                <div style={{ width: "300px", height: "480px" }}>
-                  {item}
-                </div>
-              )} >
-        <div>
-          <img  className="carousel-image" src={menu}></img>
-        </div>
-
-        <div>
-          <img  className="carousel-image" src={mario}></img>
-        </div>
-
-        <div>
-          <img  className="carousel-image" src={dnd}></img>
-        </div>
-
-        <div>
-          <img  className="carousel-image" src={menu}></img>
-        </div>
-
-        <div>
-          <img  className="carousel-image" src={mario}></img>
-        </div>
-
-        <div>
-          <img  className="carousel-image" src={dnd}></img>
-        </div>
-      </Carousel>
+        <Carousel
+          showArrows={true}
+          showStatus={false}
+          showThumbs={false}
+          infiniteLoop
+          centerMode
+          centerSlidePercentage={30}
+          selectedItem={2}
+          dynamicHeight={false}
+          width="100%"
+        >
+          {movies.map((movie) => (
+            <div key={movie.id}>
+              <img className="carousel-image" src={movie.image} style={{ width: "300px", height: "400px" }}></img>
+            </div>
+          ))}
+        </Carousel>
       </div>
     </div>
-  )
+  );
 }
 
 
-function Review() {
-  return(
-    <Container fluid className="review-area mt-5">
 
+
+
+function Review() {
+
+
+  return (
+    <Container fluid className="review-area mt-5">
       <Row>
         <Col className="review-img-container col-lg-2">
-          <img height={350} width={260} src={everything}></img>
+          <img height={350} width={260} src={everything} alt="Everything, Everywhere, All at Once poster" />
         </Col>
 
         <Col md={5} className="review-text-container">
@@ -122,15 +120,18 @@ function Review() {
           <h2>Tell us what you thought.</h2>
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-            <Form.Control as="textarea" rows={5} style={{backgroundColor: "#151515", color: "white"}}/>
-            <button type="submit" class="button">Submit</button>
-          </Form.Group>
-      </Form>
+              <Form.Control
+                as="textarea"
+                rows={5}
+                style={{ backgroundColor: "#151515", color: "white" }}
+              />
+              <button type="submit" className="button" >Submit</button>
+            </Form.Group>
+          </Form>
         </Col>
       </Row>
-
     </Container>
-  )
+  );
 }
 
 
