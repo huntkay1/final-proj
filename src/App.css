@@ -131,7 +131,6 @@ h2 {
   padding-bottom: 20px;
 }
 
-/* For screens smaller than 768px */
 @media (max-width: 767px) {
   .review-area {
     padding: 0;
